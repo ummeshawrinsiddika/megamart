@@ -5,7 +5,7 @@ export const Topbar = () => {
 
       <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-wrap">
         <span className="flex items-center gap-1 text-primary">
-          📍 <span className="hidden sm:inline">Deliver to</span>
+          <span className="hidden sm:inline">Deliver to</span>
           <strong className="text-brand ml-1">423651</strong>
         </span>
 

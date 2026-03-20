@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-export default function DailyEssentials() {
+export default function BabyClothes() {
   const [products, setProducts] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -10,7 +10,7 @@ export default function DailyEssentials() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/category/mens-shoes?limit=10")
+    fetch("https://dummyjson.com/products/category/womens-dresses?limit=10")
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
   }, []);
@@ -40,10 +40,10 @@ export default function DailyEssentials() {
       <div className="container px-4 mx-auto">
         <div className="mb-6 md:mb-10 flex items-center justify-between pb-4 border-b border-primary/30 relative after:absolute after:w-24 sm:after:w-48 md:after:w-96 after:h-1 after:left-0 after:bottom-0 after:rounded-full after:bg-brand">
           <h2 className="heading text-base sm:text-xl md:text-2xl lg:text-3xl">
-            Mens <span>Shoes</span>
+            Baby <span>Clothes</span>
           </h2>
           <Link
-            to="/shop"
+            to="/category/womens-dresses"
             className="text-xs sm:text-sm md:text-base whitespace-nowrap flex items-center gap-1"
           >
             View All <span>›</span>
@@ -86,11 +86,11 @@ export default function DailyEssentials() {
                 onClick={() => navigate(`/product/${item.id}`)}
                 className="flex-shrink-0 flex flex-col items-center gap-2 cursor-pointer w-36 sm:w-40 md:w-44"
               >
-                <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-2xl bg-gray-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={item.images[0]}
                     alt={item.title}
-                    className="w-4/5 h-4/5 object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="text-center">
@@ -98,12 +98,8 @@ export default function DailyEssentials() {
                     {item.title}
                   </h3>
                   <p className="text-xs text-brand font-medium mt-0.5">
-                    brand:{item.brand}
+                    UP to{item.price} 50% OFF
                   </p>
-                  <p className="text-sm font-bold text-primary mt-1">
-                    ${item.price}
-                  </p>
-                  <p className="text-xs text-gray-500">stock:{item.stock}</p>
                 </div>
               </div>
             ))}

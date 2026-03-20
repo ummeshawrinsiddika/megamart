@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Categorie = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.escuelajs.co/api/v1/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data.slice(0, 8)));
+  }, []);
+
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
@@ -22,12 +30,12 @@ const Categorie = () => {
               <div className="w-24 h-24 sm:w-32 sm:h-32 bg-secondary rounded-full flex items-center justify-center p-6 group-hover:bg-brand/10 transition-colors border border-gray-100 shadow-sm">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={item.name}
                   className="w-full h-full object-contain"
                 />
               </div>
               <p className="mt-4 text-sm font-bold text-primary group-hover:text-brand transition-colors text-center">
-                {item.title}
+                {item.name}
               </p>
             </div>
           ))}

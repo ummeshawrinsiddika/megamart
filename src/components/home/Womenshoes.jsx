@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-export default function DailyEssentials() {
+export default function Womenshoes() {
   const [products, setProducts] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -10,7 +10,7 @@ export default function DailyEssentials() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/category/mens-shoes?limit=10")
+    fetch("https://dummyjson.com/products/category/womens-shoes?limit=10")
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
   }, []);
@@ -40,10 +40,10 @@ export default function DailyEssentials() {
       <div className="container px-4 mx-auto">
         <div className="mb-6 md:mb-10 flex items-center justify-between pb-4 border-b border-primary/30 relative after:absolute after:w-24 sm:after:w-48 md:after:w-96 after:h-1 after:left-0 after:bottom-0 after:rounded-full after:bg-brand">
           <h2 className="heading text-base sm:text-xl md:text-2xl lg:text-3xl">
-            Mens <span>Shoes</span>
+            Women <span>Shoes</span>
           </h2>
           <Link
-            to="/shop"
+            to="/category/womens-shoes"
             className="text-xs sm:text-sm md:text-base whitespace-nowrap flex items-center gap-1"
           >
             View All <span>›</span>

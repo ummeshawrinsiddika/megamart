@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
-const Productlist = () => {
+const CategoryPage = () => {
+  const { slug } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products?limit=20")
+    setLoading(true);
+    fetch(`https://dummyjson.com/products/category/${slug}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
         setLoading(false);
       });
-  }, []);
+  }, [slug]);
 
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <p className="text-primary">Loading...</p>
+        <p className="text-primary text-xl">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-primary text-xl">No products found!</p>
       </div>
     );
   }
@@ -27,18 +37,16 @@ const Productlist = () => {
     <section className="py-10">
       <div className="container">
         <div className="flex justify-between items-center mb-6 border-b border-secondary pb-4">
-          <h2 className="heading">
-            All <span>Products</span>
+          <h2 className="heading capitalize">
+            <span>{slug.replace(/-/g, " ")}</span>
           </h2>
         </div>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {products.map((product) => {
             const discount = 30;
             const oldPrice = Math.round(
               product.price * (100 / (100 - discount)),
             );
-
             return (
               <div
                 key={product.id}
@@ -48,7 +56,6 @@ const Productlist = () => {
                 <div className="absolute top-2 right-2 bg-brand text-white text-xs font-bold px-2 py-1 rounded">
                   {discount}% OFF
                 </div>
-
                 <div className="flex justify-center mb-3 bg-white rounded p-2 h-40">
                   <img
                     src={product.images[0]}
@@ -56,7 +63,6 @@ const Productlist = () => {
                     className="h-full object-contain"
                   />
                 </div>
-
                 <h3 className="text-primary font-medium text-sm line-clamp-2">
                   {product.title}
                 </h3>
@@ -80,4 +86,4 @@ const Productlist = () => {
   );
 };
 
-export default Productlist;
+export default CategoryPage;

@@ -1,38 +1,19 @@
 import React from "react";
-import { Link } from "react-router";
-import Productcard from "../ui/Productcard";
+import { useNavigate } from "react-router";
 
 function Categories() {
-  const cetagory = [
-    {
-      title: "mobile",
-      src: "/phn1.png",
-    },
-    {
-      title: "Cosmetics ",
-      src: "/cosmetics.png",
-    },
-    {
-      title: "Electronics ",
-      src: "/electronics.png",
-    },
-    {
-      title: "Furniture  ",
-      src: "/furnuter.png",
-    },
-    {
-      title: "Watches ",
-      src: "/watch.png",
-    },
-    {
-      title: "Decor ",
-      src: "/decor.png",
-    },
-    {
-      title: "Accessories ",
-      src: "/jweelary.png",
-    },
+  const navigate = useNavigate();
+
+  const category = [
+    { title: "Mobile", src: "/phn1.png", slug: "smartphones" },
+    { title: "Cosmetics", src: "/cosmetics.png", slug: "beauty" },
+    { title: "Electronics", src: "/electronics.png", slug: "laptops" },
+    { title: "Furniture", src: "/furnuter.png", slug: "furniture" },
+    { title: "Watches", src: "/watch.png", slug: "mens-watches" },
+    { title: "Decor", src: "/decor.png", slug: "home-decoration" },
+    { title: "Accessories", src: "/jweelary.png", slug: "womens-jewellery" },
   ];
+
   return (
     <section className="py-6 md:py-10 lg:py-16">
       <div className="container px-4 mx-auto">
@@ -40,16 +21,20 @@ function Categories() {
           <h2 className="heading text-base sm:text-xl md:text-2xl lg:text-3xl">
             Shop From <span>Top Categories</span>
           </h2>
-          <Link
-            to="/"
+          <button
+            onClick={() => navigate("/shop")}
             className="text-xs sm:text-sm md:text-base whitespace-nowrap"
           >
             View All
-          </Link>
+          </button>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 sm:gap-4 md:gap-6">
-          {cetagory.map((item, index) => (
-            <div key={index} className="flex flex-col items-center gap-2">
+          {category.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => navigate(`/category/${item.slug}`)}
+              className="flex flex-col items-center gap-2 cursor-pointer hover:scale-105 transition"
+            >
               <div className="bg-secondary w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full flex items-center justify-center">
                 <img
                   src={item.src}
